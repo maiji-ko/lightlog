@@ -2,7 +2,6 @@
 
 set -e
 
-
 echo "Script executed at: $(date)" 
 
 need_clear="$1"
@@ -17,12 +16,13 @@ if [ ! -d "build" ]; then
 fi
 
 echo "Compiling project..."
-pushd build >> /dev/null
+# 使用 cd 替代 pushd/popd
+cd build
 cmake .. &&
 make -j$(nproc)
-popd >> /dev/null
+cd ..
 
-echo -e "\033[32mBuild completed successfully\033[0m"
+echo "Build completed successfully"
 
 echo "Running example..."
 ./bin/loglight_example

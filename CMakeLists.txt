@@ -25,8 +25,8 @@ endif()
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/libs)
 
-# third party
-add_subdirectory(third_party)
+# third party 下载依赖太慢了，所以先取消
+# add_subdirectory(third_party)
 
 # 源代码
 add_subdirectory(src)
