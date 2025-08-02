@@ -11,6 +11,8 @@ public:
 
     void setPattern(const std::string& pattern) override;
 
+    void setTag(const std::string& tag) override;
+
 protected:
     
     // Logger
@@ -18,9 +20,8 @@ protected:
     void logWithLocation(LogLevel level, \
         const char* file, int line, const char* function, \
         const std::string& message) override;
-private:
-    bool m_enableColor = true;
 
+private:
     // Helper
     std::string levelToString(LogLevel level);
 
@@ -29,5 +30,9 @@ private:
         const char* file, int line, const char* function, \
         const std::string& message);
     std::string extractFileName(const char* filePath);
+
+private:
+    bool m_enableColor = true;
+    std::string m_tag = "default_console_tag";
 };
 }

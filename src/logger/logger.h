@@ -125,6 +125,10 @@ public:
         return m_logLevel;
     }
 
+    ///@brief 设置日志标签
+    ///@param tag 日志标签
+    virtual void setTag(const std::string& tag) = 0;
+
     ///@brief 设置日志格式
     ///@param pattern 日志格式
     virtual void setPattern(const std::string& pattern) {
@@ -146,7 +150,7 @@ protected:
     LogLevel m_logLevel = LogLevel::INFO;
 
     // log pattern
-    std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] %v";
+    std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] [%m] %v";
 };
 
 } // namespace loglight

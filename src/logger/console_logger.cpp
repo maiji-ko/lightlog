@@ -19,6 +19,11 @@ void ConsoleLogger::setPattern(const std::string& pattern)
     m_pattern = pattern;
 }
 
+void ConsoleLogger::setTag(const std::string& tag)
+{
+    m_tag = tag;
+}
+
 std::string ConsoleLogger::levelToString(LogLevel level)
 {
      switch (level) {
@@ -141,6 +146,11 @@ std::string ConsoleLogger::formatMessageWithLocation(LogLevel level, \
     pos = formatted.find("%!"); // function name
     if (pos != std::string::npos) {
         formatted.replace(pos, 2, function ? function : "");
+    }
+
+    pos = formatted.find("%m");
+    if (pos != std::string::npos) {
+        formatted.replace(pos, 2, m_tag);
     }
 
     pos = formatted.find("%v"); // message

@@ -3,9 +3,48 @@
 //
 
 #include "interface/loglight.h"
-#include <thread>
+
 #include <chrono>
 #include <iostream>
+#include <thread>
+#include <vector>
+
+// 线程函数：记录日志并观察线程ID
+void ThreadFunction(std::shared_ptr<loglight::Logger> logger, int threadId) {
+    for (int i = 0; i < 3; ++i) {
+        logger->info("Thread {} - Message {}", threadId, i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+// 多线程测试
+void DiffThreadIdTest() {
+    // 创建控制台日志记录器
+    auto consoleLogger = loglight::LoggerFactory::createConsoleLogger();
+    consoleLogger->setLogLevel(loglight::LogLevel::INFO);
+    
+    // 设置显示线程ID的格式
+    consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [T:%t] [%l]: %v");
+    
+    const int numThreads = 3;
+    std::vector<std::thread> threads;
+    
+    consoleLogger->info("Starting multi-thread test with {} threads", numThreads);
+    
+    // 创建并启动多个线程
+    for (int i = 0; i < numThreads; ++i) {
+        threads.emplace_back(ThreadFunction, consoleLogger, i);
+    }
+    
+    // 等待所有线程完成
+    for (auto& t : threads) {
+        if (t.joinable()) {
+            t.join();
+        }
+    }
+    
+    consoleLogger->info("All threads completed");
+}
 
 // 演示控制台日志的使用
 void demonstrateConsoleLogger()
@@ -48,9 +87,10 @@ void demonstrateConsoleLogger()
     consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%l] [%P] [%t]: %v");
     consoleLogger->debug("This is an info message, you should see this message, but with a different pattern");
 
-    // 使用位置信息日志宏
-    consoleLogger->setConsoleColor(true);
-    consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%P] [%t] [%s:%# %!] %v");
+    if (consoleLogger) {
+        consoleLogger->setConsoleColor(true);
+        consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%P] [%t] [%m] [%s:%# %!] %v");
+    }
     consoleLogger->setLogLevel(loglight::LogLevel::INFO);
     std::this_thread::sleep_for(std::chrono::milliseconds(7));
     LOG_INFO(consoleLogger, "This is an info message with location info, {}", 1 + 2);
