@@ -24,4 +24,4 @@ sh build.sh
 
 ## 四、贡献人员列表
 
-[![GitHub Contributors](https://img.shields.io/github/contributors/maiji-ko/lightlog?style=for-the-badge)](https://github.com/maiji-ko/lightlog/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=maiji-ko/lightlog)](https://github.com/maiji-ko/lightlog/graphs/contributors)
