@@ -51,3 +51,4 @@
 # maijiko shell
 /build.sh
 /run.sh
+/install.sh
