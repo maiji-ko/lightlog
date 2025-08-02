@@ -3,8 +3,48 @@
 //
 
 #include "interface/loglight.h"
-#include <thread>
+
 #include <chrono>
+#include <iostream>
+#include <thread>
+#include <vector>
+
+// 线程函数：记录日志并观察线程ID
+void ThreadFunction(std::shared_ptr<loglight::Logger> logger, int threadId) {
+    for (int i = 0; i < 3; ++i) {
+        logger->info("Thread {} - Message {}", threadId, i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+// 多线程测试
+void DiffThreadIdTest() {
+    // 创建控制台日志记录器
+    auto consoleLogger = loglight::LoggerFactory::createConsoleLogger();
+    consoleLogger->setLogLevel(loglight::LogLevel::INFO);
+    
+    // 设置显示线程ID的格式
+    consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [T:%t] [%l]: %v");
+    
+    const int numThreads = 3;
+    std::vector<std::thread> threads;
+    
+    consoleLogger->info("Starting multi-thread test with {} threads", numThreads);
+    
+    // 创建并启动多个线程
+    for (int i = 0; i < numThreads; ++i) {
+        threads.emplace_back(ThreadFunction, consoleLogger, i);
+    }
+    
+    // 等待所有线程完成
+    for (auto& t : threads) {
+        if (t.joinable()) {
+            t.join();
+        }
+    }
+    
+    consoleLogger->info("All threads completed");
+}
 
 int main() {
     // create a console logger
@@ -45,6 +85,8 @@ int main() {
     LOG_DEBUG(consoleLogger, "This is a debug message with location info, {}, {}", "one", "two");
     LOG_WARNING(consoleLogger, "This is a warning message with location info");
     LOG_ERROR(consoleLogger, "This is an error message with location info {}", "ERROR.");
+
+    DiffThreadIdTest();
 
     return 0;
 }
