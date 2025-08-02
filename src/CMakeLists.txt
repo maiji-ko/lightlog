@@ -15,6 +15,10 @@ add_library(${PROJECT_NAME} SHARED ${src_list})
 add_library(loglight::loglight ALIAS loglight)
 
 # 链接依赖项
+# 链接依赖项
+if(NOT TARGET fmt::fmt)
+    message(FATAL_ERROR "fmt::fmt target not available")
+endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
 
 # 设置C++20标准

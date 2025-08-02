@@ -47,3 +47,7 @@
 # maijiko
 /libs
 /bin
+
+# maijiko shell
+/build.sh
+/run.sh

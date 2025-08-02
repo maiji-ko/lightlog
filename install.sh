@@ -1,0 +1,1 @@
+/home/maijiko/lightlog/script/install.sh
