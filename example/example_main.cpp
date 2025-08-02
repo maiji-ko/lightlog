@@ -37,7 +37,7 @@ int main() {
 
     if (consoleLogger) {
         consoleLogger->setConsoleColor(true);
-        consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%P] [%t] [%s:%# %!] %v");
+        consoleLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%P] [%t] [%m] [%s:%# %!] %v");
     }
     consoleLogger->setLogLevel(loglight::LogLevel::INFO);
     std::this_thread::sleep_for(std::chrono::milliseconds(7));

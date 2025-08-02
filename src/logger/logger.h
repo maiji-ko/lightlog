@@ -89,6 +89,9 @@ public:
         return m_logLevel;
     }
 
+    // set tag
+    virtual void setTag(const std::string& tag) = 0;
+
     // set log pattern
     virtual void setPattern(const std::string& pattern) {
         m_pattern = pattern;
@@ -109,7 +112,7 @@ protected:
     LogLevel m_logLevel = LogLevel::INFO;
 
     // log pattern
-    std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] %v";
+    std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] [%m] %v";
 };
 
 } // namespace loglight
