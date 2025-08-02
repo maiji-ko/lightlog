@@ -14,7 +14,7 @@ LightLog 是一个基于 C++20 开发的轻量级日志库，提供了灵活的�
 
 1. 在 `linux` 终端中输入
 ``` bash
-sh install.sh
+sh init.sh
 ```
 
 2. 开始构建及用例运行
