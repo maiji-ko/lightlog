@@ -16,11 +16,17 @@ if [ ! -d "build" ]; then
 fi
 
 echo "Compiling project..."
-# 使用 cd 替代 pushd/popd
-cd build
-cmake .. &&
-make -j$(nproc)
-cd ..
+pushd build
+if ! cmake ..; then
+    echo "CMake configuration failed"
+    exit 1
+fi
+
+if ! make -j$(nproc); then
+    echo "Make compilation failed"
+    exit 1
+fi
+popd
 
 echo "Build completed successfully"
 
