@@ -117,7 +117,7 @@ void demonstrateFileLogger()
     fileLogger->setLogLevel(loglight::LogLevel::INFO);
 
     // 设置日志格式
-    fileLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%l] [%s:%# %!] %v");
+    fileLogger->setPattern("[%Y-%m-%d %H:%M:%S.%e] [%m] [%s:%# %!] %v");
 
     // 记录不同级别的日志到文件
     fileLogger->info("This is an info message to file");
