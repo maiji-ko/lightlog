@@ -14,14 +14,10 @@ LightLog 是一个基于 C++20 开发的轻量级日志库，提供了灵活的�
 
 1. 在 `linux` 终端中输入
 ``` bash
-sh init.sh
+bash init.sh
 ```
 
 2. 开始构建及用例运行
 ``` bash
-sh build.sh
+bash build.sh
 ```
-
-## 四、贡献人员列表
-
-[![Contributors](https://contrib.rocks/image?repo=maiji-ko/lightlog)](https://github.com/maiji-ko/lightlog/graphs/contributors)
