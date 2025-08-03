@@ -24,22 +24,6 @@ void ConsoleLogger::setTag(const std::string& tag)
     m_tag = tag;
 }
 
-std::string ConsoleLogger::levelToString(LogLevel level)
-{
-     switch (level) {
-        case LogLevel::INFO:
-            return "I";
-        case LogLevel::DEBUG:
-            return "D";
-        case LogLevel::WARNING:
-            return "W";
-        case LogLevel::ERROR:
-            return "E";
-        default:
-            return "U";
-    }
-}
-
 std::string ConsoleLogger::extractFileName(const char* filePath)
 {
     if (!filePath) return "";

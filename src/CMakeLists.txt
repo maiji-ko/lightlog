@@ -2,6 +2,7 @@ project(loglight VERSION 1.0.0)
 
 # 设置源文件列表
 set(src_list
+    logger/logger.cpp
     logger/console_logger.cpp
     logger/file_logger.cpp
     logger_factory/logger_factory.cpp
