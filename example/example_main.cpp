@@ -97,6 +97,8 @@ void demonstrateConsoleLogger()
     LOG_DEBUG(consoleLogger, "This is a debug message with location info, {}, {}", "one", "two");
     LOG_WARNING(consoleLogger, "This is a warning message with location info");
     LOG_ERROR(consoleLogger, "This is an error message with location info {}", "ERROR.");
+
+    // DiffThreadIdTest();
 }
 
 // 演示文件日志的使用

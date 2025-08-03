@@ -47,6 +47,7 @@
 # maijiko
 /libs
 /bin
+/build.log
 
 # maijiko shell
 /build.sh

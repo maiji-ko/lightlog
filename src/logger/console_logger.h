@@ -22,9 +22,6 @@ protected:
         const std::string& message) override;
 
 private:
-    // Helper
-    std::string levelToString(LogLevel level);
-
     std::string formatMessage(LogLevel level, const std::string& message);
     std::string formatMessageWithLocation(LogLevel level, \
         const char* file, int line, const char* function, \
@@ -34,5 +31,8 @@ private:
 private:
     bool m_enableColor = true;
     std::string m_tag = "default_console_tag";
+
+    // log pattern
+    std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] %v";
 };
 }

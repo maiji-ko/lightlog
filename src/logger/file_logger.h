@@ -37,8 +37,10 @@ namespace loglight
         ///@param function 函数名
         ///@param message 日志消息
         void logWithLocation(LogLevel level,
-                             const char *file, int line, const char *function,
-                             const std::string &message) override;
+            const char *file, int line, const char *function,
+            const std::string &message) override;
+
+        void setPattern(const std::string& pattern) override;
 
         ///@brief 设置日志标签
         ///@param tag 日志标签
@@ -51,8 +53,7 @@ namespace loglight
         std::mutex m_mutex;                        // 互斥锁，保证线程安全
         std::string m_tag = "default_console_tag"; // 日志标签
 
-        // 日志级别转字符串
-        std::string levelToString(LogLevel level);
+        std::string m_pattern = "[%Y-%m-%d %H:%M:%S.%e] [%l] %v"; // 日志记录格式
 
         // 打开文件
         bool openFile();
@@ -63,7 +64,7 @@ namespace loglight
         // 格式化日志消息
         std::string formatMessage(LogLevel level, const std::string &message);
         std::string formatMessageWithLocation(LogLevel level,
-                                              const char *file, int line, const char *function,
-                                              const std::string &message);
+            const char *file, int line, const char *function,
+            const std::string &message);
     };
 }
