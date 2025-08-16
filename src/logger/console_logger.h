@@ -28,6 +28,25 @@ private:
         const std::string& message);
     std::string extractFileName(const char* filePath);
 
+    inline std::string getColor(LogLevel& level) const {
+        if (!m_enableColor)
+            return "";
+
+        switch (level) {
+            case LogLevel::INFO:
+                return "\033[32m";    // 绿色
+            case LogLevel::DEBUG:
+                return "\033[34m";    // 蓝色
+            case LogLevel::WARNING:
+                return "\033[33m";    // 黄色
+            case LogLevel::ERROR:
+                return "\033[31m";    // 红色
+            case LogLevel::LOG_LEVEL_MAX:
+            default:
+                return "\033[97m";    // 亮白色
+        }
+    }
+
 private:
     bool m_enableColor = true;
     std::string m_tag = "default_console_tag";

@@ -152,27 +152,7 @@ std::string ConsoleLogger::formatMessage(LogLevel level, const std::string& mess
 void ConsoleLogger::log(LogLevel level, const std::string& message)
 {
     std::string formattedMessage = formatMessage(level, message);
-
-    if (m_enableColor) {
-        std::string color;
-        switch (level) {
-            case LogLevel::INFO:
-                color = "\033[32m";
-                break; // 绿色
-            case LogLevel::DEBUG:
-                color = "\033[34m";
-                break; // 蓝色
-            case LogLevel::WARNING:
-                color = "\033[33m";
-                break; // 黄色
-            case LogLevel::ERROR:
-                color = "\033[31m";
-                break; // 红色
-        }
-        std::cout << color << formattedMessage << "\033[0m" << std::endl;
-    } else {
-        std::cout << formattedMessage << std::endl;
-    }
+    std::cout << getColor(level) << formattedMessage << "\033[0m" << std::endl;
 }
 
 void ConsoleLogger::logWithLocation(LogLevel level, \
@@ -180,27 +160,7 @@ void ConsoleLogger::logWithLocation(LogLevel level, \
     const std::string& message)
 {
     std::string formattedMessage = formatMessageWithLocation(level, file, line, function, message);
-
-    if (m_enableColor) {
-        std::string color;
-        switch (level) {
-            case LogLevel::INFO:
-                color = "\033[32m";
-                break; // 绿色
-            case LogLevel::DEBUG:
-                color = "\033[34m";
-                break; // 蓝色
-            case LogLevel::WARNING:
-                color = "\033[33m";
-                break; // 黄色
-            case LogLevel::ERROR:
-                color = "\033[31m";
-                break; // 红色
-        }
-        std::cout << color << formattedMessage << "\033[0m" << std::endl;
-    } else {
-        std::cout << formattedMessage << std::endl;
-    }
+    std::cout << getColor(level) << formattedMessage << "\033[0m" << std::endl;
 }
 
 }
